@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Halaman 2</h1>
+Testing testing testing
+<h1>Hi, {{ user.nickname }}!</h1>
+    {% for post in posts %}
+    <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+<div class="dropdown">
+  <label  class="dropbtn" >Dropdown</label>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div>
+{% endblock %}
+ 
