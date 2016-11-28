@@ -1,25 +1,23 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for, request
 from app import app
 from .forms import LoginForm
+import json,urllib, sys
 
-@app.route('/')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login requested for OpenID="%s", remember_me=%s' %
-              (form.openid.data, str(form.remember_me.data)))
-        return redirect('/index')    
-    return render_template('login.html', 
-                           title='Sign In',
-                           form=form,
-                           providers=app.config['OPENID_PROVIDERS'])
+	error=None
+	if request.method =='POST':
+		if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+			error='zzzzzzzzzzzzzzzzzzz'
+		else:
+			return redirect(url_for('ws'))
+	return render_template("login.html",
+							error=error)
 
 
-@app.route('/')
-@app.route('/index')
 def index():
-    user = {'nickname': 'Miguel'}  # fake user
+    user = {'nickname': 'Miguel'} 
     posts = [  # fake array of posts
         { 
             'author': {'nickname': 'John'}, 
@@ -30,48 +28,35 @@ def index():
             'body': 'The Avengers movie was so cool!' 
         }
     ]
-    return render_template("index.html",
+    return render_template("index.html",					   
                            title='Home',
                            user=user,
                            posts=posts)
 
 @app.route('/')
-@app.route('/Profile')
-def Profile():
-    user = {'nickname': 'Sandi'}  # fake user
-    posts = [  # fake array of posts
-        { 
-            'author': {'nickname': 'Ricky'}, 
-            'body': 'Beautiful day in Fin!' 
-        },
-        { 
-            'author': {'nickname': 'rizz'}, 
-            'body': 'so cool!' 
-        }
-    ]
-    return render_template("Profile.html",
-                           title='Profile',
-                           user=user,
-                           posts=posts)
-
-@app.route('/')
-@app.route('/Gallery')
-def Gallery():
-    user = {'nickname': 'Raph'}  # fake user
-    posts = [  # fake array of posts
-        { 
-            'author': {'nickname': 'Don'}, 
-            'body': 'Beautiful day in west!' 
-        },
-        { 
-            'author': {'nickname': 'Susan'}, 
-            'body': 'HOT' 
-        }
-    ]
-    return render_template("Gallery.html",
-                           title='Gallery',
-                           user=user,
-                           posts=posts)
-                           
+@app.route('/index')
+def ws():	
+	#link json
+	data = urllib.urlopen("http://128.199.232.32/todo/api/v1.0/tasks").read()
+	#manggil json
+	resp_dict = json.loads(data)
+	#menampilkan json
+	print '----------------------------------------------------'
+	print (resp_dict)
+	print '----------------------------------------------------'
+	print ('status :')
+	print (resp_dict['tasks.uri'])  #parameter
+	print '----------------------------------------------------'
+	
 
 
+	
+	print '----------------------------------------------------'	
+	return render_template("index.html",					   
+                           title='Home',
+                           resp_dict=resp_dict)
+
+@app.route('/InputJual')
+def InputJual():   
+    return render_template("FormInputPenjualan.html",					   
+                           title='input Penjualan')

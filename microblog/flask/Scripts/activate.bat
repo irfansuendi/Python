@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=D:\Test\microblog\flask"
+set "VIRTUAL_ENV=D:\Test\FlaskTutor\microblog\flask"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"

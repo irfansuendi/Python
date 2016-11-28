@@ -1,10 +1,31 @@
 {% extends "base.html" %}
-{% block content %}     
-<h1>Halaman 1</h1>
-<h1>Hi, {{ user.nickname }}!</h1>
-    {% for post in posts %}
-    <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
-    {% endfor %}
+{% block content %}   
+<div class="panel panel-primary">
+  <div class="panel-heading" align="center">
+    <h3 class="panel-title">Table dari Web Service saboga</h3>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>STATUS</th>
+                <th>MESSAGE</th>
+                <th>ERROR</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for post in resp_dict %}
+              <tr>
+                <td><div><b>{{ resp_dict.description}}</b></div></td>
+                <td><div><b>{{ resp_dict.done}}</b></div></td>
+                <td><div><b>{{ resp_dict.title}}</b></div></td> 
+              </tr>   
+              {% endfor %}         
+            </tbody>
+          </table>
+    </div>
+  </div>
+</div>
+  
 {% endblock %}
- 
-
