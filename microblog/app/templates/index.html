@@ -9,17 +9,19 @@
         <table class="table table-striped">
             <thead>
               <tr>
-                <th>STATUS</th>
-                <th>MESSAGE</th>
-                <th>ERROR</th>
+                <th>URL</th>
+                <th>DONE</th>
+                <th>DESCRIOTION</th>
+                <th>TITLE</th>
               </tr>
             </thead>
             <tbody>
-              {% for post in resp_dict %}
+              {% for post in resp_dict['tasks'] %}
               <tr>
-                <td><div><b>{{ resp_dict.description}}</b></div></td>
-                <td><div><b>{{ resp_dict.done}}</b></div></td>
-                <td><div><b>{{ resp_dict.title}}</b></div></td> 
+                <td><div><b>{{post.uri}}</b></div></td>
+                <td><div><b>{{post.done}}</b></div></td>
+                <td><div><b>{{post.description}}</b></div></td>
+                <td><div><b>{{post.title}}</b></div></td>
               </tr>   
               {% endfor %}         
             </tbody>

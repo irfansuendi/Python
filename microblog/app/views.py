@@ -1,10 +1,10 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app
 from .forms import LoginForm
-import json,urllib, sys
+import json,urllib, sys,requests
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
 	error=None
 	if request.method =='POST':
@@ -33,28 +33,29 @@ def index():
                            user=user,
                            posts=posts)
 
-@app.route('/')
-@app.route('/index')
+
+@app.route('/get')
 def ws():	
-	#link json
 	data = urllib.urlopen("http://128.199.232.32/todo/api/v1.0/tasks").read()
-	#manggil json
 	resp_dict = json.loads(data)
-	#menampilkan json
-	print '----------------------------------------------------'
-	print (resp_dict)
-	print '----------------------------------------------------'
-	print ('status :')
-	print (resp_dict['tasks.uri'])  #parameter
-	print '----------------------------------------------------'
-	
-
-
-	
-	print '----------------------------------------------------'	
 	return render_template("index.html",					   
                            title='Home',
-                           resp_dict=resp_dict)
+                           resp_dict=resp_dict
+                           )
+
+
+@app.route('/post')
+def wspost():		
+	url = 'http://128.199.232.32/todo/api/v1.0/tasks'
+	payload = {'title': 'test', 'description': 'test input'}
+	headers = {'content-type': 'application/json'}
+	response = requests.post(url, data=json.dumps(payload), headers=headers)
+	data = urllib.urlopen(url).read()
+	resp_dict = json.loads(data)	
+	return render_template("index.html",
+							title='Home',
+							resp_dict=resp_dict)
+
 
 @app.route('/InputJual')
 def InputJual():   
