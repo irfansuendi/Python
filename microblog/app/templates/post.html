@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}   
+<form class="navbar-form navbar-left" method="post">
+	<div class="form-group">
+		<input type="text" name="judul" value="{{request.form.judul}}">
+	</div>
+	<div class="form-group">
+		<input type="text" name="description" value="{{request.form.description}}">
+	</div>
+	<button type="submit" class="btn btn-success">Sign in</button>
+<hr><hr><hr>
+	<div class="form-group">
+		<input type="text" name="id" value="{{request.form.id}}">
+	</div>
+	<button type="submit" class="btn btn-success">Sign in</button>
+</form>
+{% endblock %}

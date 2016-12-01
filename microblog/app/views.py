@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app
 from .forms import LoginForm
-import json,urllib, sys,requests
+import json,urllib, sys, requests
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -11,7 +11,7 @@ def login():
 		if request.form['username'] != 'admin' or request.form['password'] != 'admin':
 			error='zzzzzzzzzzzzzzzzzzz'
 		else:
-			return redirect(url_for('ws'))
+			return redirect('/get')
 	return render_template("login.html",
 							error=error)
 
@@ -44,17 +44,28 @@ def ws():
                            )
 
 
-@app.route('/post')
+@app.route('/posts', methods=['GET', 'POST'])
 def wspost():		
-	url = 'http://128.199.232.32/todo/api/v1.0/tasks'
-	payload = {'title': 'test', 'description': 'test input'}
-	headers = {'content-type': 'application/json'}
-	response = requests.post(url, data=json.dumps(payload), headers=headers)
-	data = urllib.urlopen(url).read()
-	resp_dict = json.loads(data)	
-	return render_template("index.html",
-							title='Home',
-							resp_dict=resp_dict)
+	if request.method =='POST':
+		url = 'http://128.199.232.32/todo/api/v1.0/tasks'
+		payload = {'title': request.form['judul'], 'description': request.form['description']}
+		headers = {'content-type': 'application/json'}
+		response = requests.post(url, data=json.dumps(payload), headers=headers)
+		return 	redirect('/get')
+	return render_template("post.html",
+							title='Home')
+
+@app.route('/del', methods=['GET', 'POST'])
+def delet():		
+	if request.method =='POST':
+		url = 'http://128.199.232.32/todo/api/v1.0/tasks'
+		payload = {'id': request.form['id']}		
+		headers = {'content-type': 'application/json'}
+		#response = requests.delete(url, data=json.dumps(payload), headers=headers)
+		response = requests.request("DELETE", url, headers=headers)
+		return 	redirect('/get')
+	return render_template("post.html",
+							title='Home')
 
 
 @app.route('/InputJual')
