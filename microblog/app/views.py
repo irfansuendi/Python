@@ -72,3 +72,17 @@ def delet():
 def InputJual():   
     return render_template("FormInputPenjualan.html",					   
                            title='input Penjualan')
+@app.route('/LapJual')
+def lapJual():   
+    return render_template("LapJual.html",					   
+                           title='input Penjualan')
+
+@app.route('/InputReturJual')
+def InputReturJual():   
+    return render_template("InputReturJual.html",					   
+                           title='input Penjualan')
+
+@app.route('/LapReturJual')
+def lapReturJual():   
+    return render_template("LapReturJual.html",					   
+                           title='input Penjualan')

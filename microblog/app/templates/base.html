@@ -6,10 +6,13 @@
     <title>Welcome to microblog</title>
     {% endif %}
   </head>
+
   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
   <link href="../static/css/dashboard.css" rel="stylesheet">
   <link href="../static/css/sticky-footer-navbar.css" rel="stylesheet">
-  <body>
+  <link href="../static/css/dataTables.bootstrap.css" rel="stylesheet">
+  <link href="../static/css/dataTables.responsive.css" rel="stylesheet">
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -25,6 +28,9 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/index">Home</a></li>
             <li><a href="/InputJual">Input Penjualan</a></li>
+            <li><a href="/LapJual">Laporan Penjualan</a></li>
+            <li><a href="/InputReturJual">Input Retur Penjualan</a></li>
+            <li><a href="/LapReturJual">Laporan Retur Penjualan</a></li>
             <li><a href="/">Login</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -51,5 +57,16 @@
     </footer>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="../static/js/bootstrap.min.js"></script>
+  <script src="../static/js/jquery.min.js"></script>
+  <script src="../static/js/jquery.dataTables.min.js"></script>
+  <script src="../static/js/dataTables.bootstrap.min.js"></script>
+  <script src="../static/js/dataTables.responsive.js"></script>
+  <script>
+  $(document).ready(function() {
+      $('#dataTables-example').DataTable({
+          responsive: true
+      });
+  });
+  </script>
   </body>
 </html>
