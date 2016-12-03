@@ -6,23 +6,18 @@
   </div>
   <div class="panel-body">
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped" id="dataTables-example">
             <thead>
               <tr>
                 <th>URL</th>
                 <th>DONE</th>
-                <th>DESCRIOTION</th>
-                <th>TITLE</th>
               </tr>
             </thead>
             <tbody>
-              {% for post in resp_dict['tasks'] %}
+              {% for post in resp_dict%}
               <tr>
-                <td><div><b>{{post.uri}}</b></div></td>
-                <td><div><b>{{post.done}}</b></div></td>
-                <td><div><b>{{post.description}}</b></div></td>
-                <td><div><b>{{post.title}}</b></div></td>
-              </tr>   
+                <td><div><b>{{post.COUNTRY}}</b></div></td>
+                <td><div><b>{{post.CURRENCY}}</b></div></td>
               {% endfor %}         
             </tbody>
           </table>

@@ -36,7 +36,7 @@ def index():
 
 @app.route('/get')
 def ws():	
-	data = urllib.urlopen("http://128.199.232.32/todo/api/v1.0/tasks").read()
+	data = urllib.urlopen("http://128.199.232.32/db").read()
 	resp_dict = json.loads(data)
 	return render_template("index.html",					   
                            title='Home',
